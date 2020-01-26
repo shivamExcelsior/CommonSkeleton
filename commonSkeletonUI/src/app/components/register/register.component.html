@@ -1,1 +1,91 @@
-<p>register works!</p>
+<div class="container text-center"> 
+    <div class="col-4 form-container">
+        <form class="form-signup" #registerFormID="ngForm" novalidate [formGroup]="registerForm" (submit)="onRegisterSubmit(registerFormID)">
+            <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>Sign Up</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="example-container">
+                        <mat-form-field>
+                          <input matInput type="text" formControlName="name" placeholder="Name" required>
+                          <mat-error *ngIf="name.hasError('required')">Name is required</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="example-container">
+                        <mat-form-field>
+                          <input matInput type="text" formControlName="username" placeholder="Username" required>
+                          <mat-error *ngIf="username.hasError('required')">Username is required</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="example-container">
+                        <mat-form-field>
+                          <input matInput type="email" formControlName="email" placeholder="Email" required>
+                          <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
+                          <mat-error *ngIf="email.hasError('email')">Invalid email</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="example-container">
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="picker1" placeholder="DoB" formControlName="dob" required />
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                          <mat-error *ngIf="dob.hasError('required')">Date of birth is required</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="example-container">
+                        <!-- <mat-form-field> -->
+                            <mat-radio-group
+                            aria-labelledby="example-radio-group-label"
+                            class="example-radio-group"
+                            formControlName="selectGender">
+                                <mat-radio-button class="example-radio-button" *ngFor="let gender of genders" [value]="gender">
+                                {{gender}}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                            <mat-error *ngIf="selectGender.hasError('required')">Gender is required</mat-error>
+                        <!-- </mat-form-field> -->
+                    </div>
+            
+                    <div class="example-container">
+                        <mat-form-field>
+                          <input matInput formControlName="password" placeholder="Password" [type]="hide ? 'password' : 'text'" required>
+                          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                          </button>
+                          <mat-error *ngIf="password.hasError('required')">Password is required</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="example-container">
+                        <mat-form-field>
+                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="cpassword" placeholder="Confirm Password" required>
+                          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                          </button>
+                          <mat-error *ngIf="cpassword.hasError('required')">Confirm Password is required</mat-error>
+                          <mat-error *ngIf="cpassword.error?.notEquivalent">Passwords do not match</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" type="submit">Sign Up</button>
+            
+                    <p>
+                        Already a member?
+                        <a [routerLink]="['/login']" routerLinkActive="router-link-active" >
+                            <strong>
+                                Go to Login
+                            </strong>
+                        </a>
+                    </p>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+    </div>     
+
+</div>
