@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
     } else {
       console.log('Form Data:', this.loginForm.value)
       formId.resetForm()
+      this.buildLoginForm()
     }
   }
 
